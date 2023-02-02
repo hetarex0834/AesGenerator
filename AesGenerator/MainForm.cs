@@ -15,16 +15,26 @@ namespace AesGenerator
         public MainForm() => InitializeComponent();
 
         /// <summary>
-        /// 暗号化ボタン
+        /// 鍵生成ボタン
         /// </summary>
-        private void BtnEncrypt_Click(object sender, EventArgs e)
+        private void BtnGenKey_Click(object sender, EventArgs e)
         {
             // 初期化ベクトル
             txtIv.Text = GenerateAes(ivSize);
             // 暗号鍵
             txtKey.Text = GenerateAes(keySize);
+        }
+
+        /// <summary>
+        /// 暗号化ボタン
+        /// </summary>
+        private void BtnEncrypt_Click(object sender, EventArgs e)
+        {
+            var iv = Encoding.UTF8.GetBytes(txtIv.Text);
+            var key = Encoding.UTF8.GetBytes(txtKey.Text);
+
             // 暗号化
-            txtCipher.Text = Encrypt(txtPlain.Text, txtIv.Text, txtKey.Text);
+            txtCipher.Text = Encrypt(txtPlain.Text, iv, key);
         }
 
         /// <summary>
@@ -32,7 +42,11 @@ namespace AesGenerator
         /// </summary>
         private void BtnDecrypt_Click(object sender, EventArgs e)
         {
+            var iv = Encoding.UTF8.GetBytes(txtIv.Text);
+            var key = Encoding.UTF8.GetBytes(txtKey.Text);
 
+            // 復号化
+            txtDecrypted.Text = Decrypt(txtCipher.Text, iv, key);
         }
 
         /// <summary>
@@ -57,7 +71,7 @@ namespace AesGenerator
         /// <param name="iv">初期化ベクトル</param>
         /// <param name="key">暗号鍵</param>
         /// <returns>暗号文</returns>
-        private static string Encrypt(string plain, string iv, string key)
+        private static string Encrypt(string plain, byte[] iv, byte[] key)
         {
             // AES
             using var aes = Aes.Create();
@@ -65,15 +79,42 @@ namespace AesGenerator
             aes.KeySize = 256; // 鍵長
             aes.Mode = CipherMode.CBC; // 暗号利用モード
             aes.Padding = PaddingMode.PKCS7; // パディング
-            aes.IV = Encoding.UTF8.GetBytes(iv); // 初期化ベクトル
-            aes.Key = Encoding.UTF8.GetBytes(key); // 暗号鍵
+            aes.IV = iv; // 初期化ベクトル
+            aes.Key = key; // 暗号鍵
 
-            // バイト配列化
-            var byteText = Encoding.UTF8.GetBytes(plain);
             // 暗号化
-            var encryptText = aes.CreateEncryptor().TransformFinalBlock(byteText, 0, byteText.Length);
+            var byteText = Encoding.UTF8.GetBytes(plain);
+            var cipher = aes.CreateEncryptor().TransformFinalBlock(byteText, 0, byteText.Length);
 
-            return Convert.ToBase64String(encryptText);
+            return Convert.ToBase64String(cipher);
+        }
+
+        /// <summary>
+        /// 暗号文をAES-256で復号化
+        /// </summary>
+        /// <param name="cipher">暗号文</param>
+        /// <param name="iv">初期化ベクトル</param>
+        /// <param name="key">復号鍵</param>
+        /// <returns>復号した平文</returns>
+        private static string Decrypt(string cipher, byte[] iv, byte[] key)
+        {
+            // AES
+            using var aes = Aes.Create();
+            aes.BlockSize = 128; // ブロックサイズ
+            aes.KeySize = 256; // 鍵長
+            aes.Mode = CipherMode.CBC; // 暗号利用モード
+            aes.Padding = PaddingMode.PKCS7; // パディング
+            aes.IV = iv; // 初期化ベクトル
+            aes.Key = key; // 復号鍵
+
+            // 復号化
+            var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+            using var ms = new MemoryStream(Convert.FromBase64String(cipher));
+            using var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
+            using var sr = new StreamReader(cs);
+            var plain = sr.ReadToEnd();
+
+            return plain;
         }
     }
 }

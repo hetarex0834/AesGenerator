@@ -41,6 +41,7 @@
             this.txtDecrypted = new System.Windows.Forms.TextBox();
             this.btnEncrypt = new System.Windows.Forms.Button();
             this.btnDecrypt = new System.Windows.Forms.Button();
+            this.btnGenKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -170,12 +171,25 @@
             this.btnDecrypt.UseVisualStyleBackColor = true;
             this.btnDecrypt.Click += new System.EventHandler(this.BtnDecrypt_Click);
             // 
+            // btnGenKey
+            // 
+            this.btnGenKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenKey.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnGenKey.Location = new System.Drawing.Point(394, 612);
+            this.btnGenKey.Name = "btnGenKey";
+            this.btnGenKey.Size = new System.Drawing.Size(120, 70);
+            this.btnGenKey.TabIndex = 6;
+            this.btnGenKey.Text = "鍵生成";
+            this.btnGenKey.UseVisualStyleBackColor = true;
+            this.btnGenKey.Click += new System.EventHandler(this.BtnGenKey_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 694);
             this.Controls.Add(this.btnDecrypt);
+            this.Controls.Add(this.btnGenKey);
             this.Controls.Add(this.btnEncrypt);
             this.Controls.Add(this.txtDecrypted);
             this.Controls.Add(this.txtCipher);
@@ -214,5 +228,6 @@
         private TextBox txtDecrypted;
         private Button btnEncrypt;
         private Button btnDecrypt;
+        private Button btnGenKey;
     }
 }

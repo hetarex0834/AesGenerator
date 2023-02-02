@@ -66,9 +66,9 @@
             // txtPlain
             // 
             this.txtPlain.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPlain.Location = new System.Drawing.Point(214, 131);
+            this.txtPlain.Location = new System.Drawing.Point(114, 131);
             this.txtPlain.Name = "txtPlain";
-            this.txtPlain.Size = new System.Drawing.Size(350, 45);
+            this.txtPlain.Size = new System.Drawing.Size(550, 45);
             this.txtPlain.TabIndex = 1;
             // 
             // lblIv
@@ -115,35 +115,35 @@
             // 
             this.txtIv.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtIv.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtIv.Location = new System.Drawing.Point(214, 227);
+            this.txtIv.Location = new System.Drawing.Point(114, 227);
             this.txtIv.Name = "txtIv";
-            this.txtIv.Size = new System.Drawing.Size(350, 45);
+            this.txtIv.Size = new System.Drawing.Size(550, 45);
             this.txtIv.TabIndex = 2;
             // 
             // txtKey
             // 
             this.txtKey.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtKey.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtKey.Location = new System.Drawing.Point(214, 323);
+            this.txtKey.Location = new System.Drawing.Point(114, 323);
             this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(350, 45);
+            this.txtKey.Size = new System.Drawing.Size(550, 45);
             this.txtKey.TabIndex = 3;
             // 
             // txtCipher
             // 
             this.txtCipher.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtCipher.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtCipher.Location = new System.Drawing.Point(214, 419);
+            this.txtCipher.Location = new System.Drawing.Point(114, 419);
             this.txtCipher.Name = "txtCipher";
-            this.txtCipher.Size = new System.Drawing.Size(350, 45);
+            this.txtCipher.Size = new System.Drawing.Size(550, 45);
             this.txtCipher.TabIndex = 4;
             // 
             // txtDecrypted
             // 
             this.txtDecrypted.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtDecrypted.Location = new System.Drawing.Point(214, 515);
+            this.txtDecrypted.Location = new System.Drawing.Point(114, 515);
             this.txtDecrypted.Name = "txtDecrypted";
-            this.txtDecrypted.Size = new System.Drawing.Size(350, 45);
+            this.txtDecrypted.Size = new System.Drawing.Size(550, 45);
             this.txtDecrypted.TabIndex = 5;
             // 
             // btnEncrypt
@@ -156,6 +156,7 @@
             this.btnEncrypt.TabIndex = 6;
             this.btnEncrypt.Text = "暗号化";
             this.btnEncrypt.UseVisualStyleBackColor = true;
+            this.btnEncrypt.Click += new System.EventHandler(this.BtnEncrypt_Click);
             // 
             // btnDecrypt
             // 
@@ -167,6 +168,7 @@
             this.btnDecrypt.TabIndex = 7;
             this.btnDecrypt.Text = "復号化";
             this.btnDecrypt.UseVisualStyleBackColor = true;
+            this.btnDecrypt.Click += new System.EventHandler(this.BtnDecrypt_Click);
             // 
             // MainForm
             // 

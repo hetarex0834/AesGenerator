@@ -1,6 +1,6 @@
 ﻿namespace AesGenerator
 {
-    partial class Form
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.

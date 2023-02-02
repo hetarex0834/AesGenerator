@@ -1,8 +1,8 @@
 namespace AesGenerator
 {
-    public partial class Form : System.Windows.Forms.Form
+    public partial class MainForm : Form
     {
-        public Form()
+        public MainForm()
         {
             InitializeComponent();
         }

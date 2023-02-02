@@ -9,8 +9,8 @@ namespace AesGenerator
     public partial class MainForm : Form
     {
         // バイトサイズ
-        private static readonly int ivSize = 12; // 初期化ベクトル
-        private static readonly int keySize = 24; // 暗号鍵
+        private static readonly int ivSize = 16; // 初期化ベクトル
+        private static readonly int keySize = 32; // 暗号鍵
 
         public MainForm() => InitializeComponent();
 
@@ -20,9 +20,9 @@ namespace AesGenerator
         private void BtnGenKey_Click(object sender, EventArgs e)
         {
             // 初期化ベクトル
-            txtIv.Text = GenerateAes(ivSize);
+            txtIv.Text = GenerateAes(12);
             // 暗号鍵
-            txtKey.Text = GenerateAes(keySize);
+            txtKey.Text = GenerateAes(24);
         }
 
         /// <summary>
@@ -30,11 +30,28 @@ namespace AesGenerator
         /// </summary>
         private void BtnEncrypt_Click(object sender, EventArgs e)
         {
-            var iv = Encoding.UTF8.GetBytes(txtIv.Text);
-            var key = Encoding.UTF8.GetBytes(txtKey.Text);
+            try
+            {
+                // 初期化ベクトル
+                var iv = Encoding.UTF8.GetBytes(txtIv.Text);
+                // 暗号鍵
+                var key = Encoding.UTF8.GetBytes(txtKey.Text);
 
-            // 暗号化
-            txtCipher.Text = Encrypt(txtPlain.Text, iv, key);
+                // 整合性チェック
+                if (iv.Length != ivSize) throw new ArgumentException("初期化ベクトルが正しく設定されていません。");
+                if (key.Length != keySize) throw new ArgumentException("暗号鍵が正しく設定されていません。");
+
+                // 暗号化
+                txtCipher.Text = Encrypt(txtPlain.Text, iv, key);
+            }
+            catch (ArgumentException ae)
+            {
+                MessageBox.Show(ae.Message, "暗号化エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch
+            {
+                MessageBox.Show("暗号化に失敗しました。", "暗号化エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -42,11 +59,40 @@ namespace AesGenerator
         /// </summary>
         private void BtnDecrypt_Click(object sender, EventArgs e)
         {
-            var iv = Encoding.UTF8.GetBytes(txtIv.Text);
-            var key = Encoding.UTF8.GetBytes(txtKey.Text);
+            try
+            {
+                // 初期化ベクトル
+                var iv = Encoding.UTF8.GetBytes(txtIv.Text);
+                // 暗号鍵
+                var key = Encoding.UTF8.GetBytes(txtKey.Text);
 
-            // 復号化
-            txtDecrypted.Text = Decrypt(txtCipher.Text, iv, key);
+                // 整合性チェック
+                if (iv.Length != ivSize) throw new ArgumentException("初期化ベクトルが正しく設定されていません。");
+                if (key.Length != keySize) throw new ArgumentException("暗号鍵が正しく設定されていません。");
+
+                // 復号化
+                txtDecrypted.Text = Decrypt(txtCipher.Text, iv, key);
+            }
+            catch (ArgumentException ae)
+            {
+                MessageBox.Show(ae.Message, "復号化エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch
+            {
+                MessageBox.Show("復号化に失敗しました。", "復号化エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 消去ボタン
+        /// </summary>
+        private void BtnClear_Click(object sender, EventArgs e)
+        {
+            txtPlain.Text = string.Empty;
+            txtIv.Text = string.Empty;
+            txtKey.Text = string.Empty;
+            txtCipher.Text = string.Empty;
+            txtDecrypted.Text = string.Empty;
         }
 
         /// <summary>
@@ -94,7 +140,7 @@ namespace AesGenerator
         /// </summary>
         /// <param name="cipher">暗号文</param>
         /// <param name="iv">初期化ベクトル</param>
-        /// <param name="key">復号鍵</param>
+        /// <param name="key">暗号鍵</param>
         /// <returns>復号した平文</returns>
         private static string Decrypt(string cipher, byte[] iv, byte[] key)
         {
@@ -105,7 +151,7 @@ namespace AesGenerator
             aes.Mode = CipherMode.CBC; // 暗号利用モード
             aes.Padding = PaddingMode.PKCS7; // パディング
             aes.IV = iv; // 初期化ベクトル
-            aes.Key = key; // 復号鍵
+            aes.Key = key; // 暗号鍵
 
             // 復号化
             var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);

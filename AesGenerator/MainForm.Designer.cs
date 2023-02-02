@@ -42,6 +42,7 @@
             this.btnEncrypt = new System.Windows.Forms.Button();
             this.btnDecrypt = new System.Windows.Forms.Button();
             this.btnGenKey = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -151,10 +152,10 @@
             // 
             this.btnEncrypt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEncrypt.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnEncrypt.Location = new System.Drawing.Point(520, 612);
+            this.btnEncrypt.Location = new System.Drawing.Point(394, 612);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(120, 70);
-            this.btnEncrypt.TabIndex = 6;
+            this.btnEncrypt.TabIndex = 7;
             this.btnEncrypt.Text = "暗号化";
             this.btnEncrypt.UseVisualStyleBackColor = true;
             this.btnEncrypt.Click += new System.EventHandler(this.BtnEncrypt_Click);
@@ -163,10 +164,10 @@
             // 
             this.btnDecrypt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDecrypt.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDecrypt.Location = new System.Drawing.Point(646, 612);
+            this.btnDecrypt.Location = new System.Drawing.Point(520, 612);
             this.btnDecrypt.Name = "btnDecrypt";
             this.btnDecrypt.Size = new System.Drawing.Size(120, 70);
-            this.btnDecrypt.TabIndex = 7;
+            this.btnDecrypt.TabIndex = 8;
             this.btnDecrypt.Text = "復号化";
             this.btnDecrypt.UseVisualStyleBackColor = true;
             this.btnDecrypt.Click += new System.EventHandler(this.BtnDecrypt_Click);
@@ -175,7 +176,7 @@
             // 
             this.btnGenKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenKey.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnGenKey.Location = new System.Drawing.Point(394, 612);
+            this.btnGenKey.Location = new System.Drawing.Point(268, 612);
             this.btnGenKey.Name = "btnGenKey";
             this.btnGenKey.Size = new System.Drawing.Size(120, 70);
             this.btnGenKey.TabIndex = 6;
@@ -183,12 +184,25 @@
             this.btnGenKey.UseVisualStyleBackColor = true;
             this.btnGenKey.Click += new System.EventHandler(this.BtnGenKey_Click);
             // 
+            // btnClear
+            // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.Font = new System.Drawing.Font("Yu Gothic UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnClear.Location = new System.Drawing.Point(646, 612);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(120, 70);
+            this.btnClear.TabIndex = 9;
+            this.btnClear.Text = "消去";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 694);
             this.Controls.Add(this.btnDecrypt);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnGenKey);
             this.Controls.Add(this.btnEncrypt);
             this.Controls.Add(this.txtDecrypted);
@@ -229,5 +243,6 @@
         private Button btnEncrypt;
         private Button btnDecrypt;
         private Button btnGenKey;
+        private Button btnClear;
     }
 }
